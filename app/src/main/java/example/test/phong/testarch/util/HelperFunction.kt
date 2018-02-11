@@ -40,4 +40,14 @@ fun AppCompatActivity.replaceFragmentSafely(fragment: Fragment,
     }
 }
 
+fun AppCompatActivity.addFragment(fragmentNew: Fragment, tag: String? = null, @IdRes containerViewId: Int) {
+    var fragmentOld = supportFragmentManager.findFragmentByTag(tag)
+    fragmentOld.whenNull {
+        supportFragmentManager
+                .beginTransaction()
+                .add(containerViewId, fragmentNew, tag)
+                .commit()
+    }
+}
+
 
