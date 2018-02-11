@@ -1,13 +1,34 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="example.test.phong.testarch.ui.ProductListFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="isLoading"
+            type="boolean" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:background="@color/cardview_light_background"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/loading_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/loading_products"
+            android:textAlignment="center"
+            app:visibleGone="@{isLoading}"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/products_list"
+            android:contentDescription="@string/cd_products_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="LinearLayoutManager"
+            app:visibleGone="@{!isLoading}"/>
+
+    </LinearLayout>
+</layout>
