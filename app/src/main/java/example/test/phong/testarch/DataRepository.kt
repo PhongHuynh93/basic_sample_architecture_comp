@@ -16,6 +16,7 @@ class DataRepository(val database: AppDatabase) {
     init {
         mObservableProducts = MediatorLiveData<List<ProductEntity>>()
         // info notify when the database changed and db is created
+                // test - find out why the load all products didn't happen on bg thread but we still use postValue
         mObservableProducts.addSource(database.productDao().loadAllProducts(),
                 { productEntities ->
                     database.mIsDatabaseCreated.getValue()?.let {

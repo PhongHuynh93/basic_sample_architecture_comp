@@ -42,4 +42,8 @@ class ProductListFragment : Fragment() {
         return mBinding.root
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+    }
 }
