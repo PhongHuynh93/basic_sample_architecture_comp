@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import example.test.phong.testarch.R
 import example.test.phong.testarch.db.entity.ProductEntity
 import example.test.phong.testarch.util.addFragment
+import example.test.phong.testarch.util.replaceFragmentSafely
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +18,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun show(product: ProductEntity) {
-//        replaceFragmentSafely()
+        replaceFragmentSafely(fragment = ProductFragment.newInstance(product.id), backStackName = "product", containerViewId = R.id.fragment_container)
     }
 }

@@ -21,13 +21,14 @@ inline fun Any?.whenNotNull(f: () -> Unit) {
 }
 
 fun AppCompatActivity.replaceFragmentSafely(fragment: Fragment,
-                                                   tag: String? = null,
-                                                   allowStateLoss: Boolean = false,
-                                                   @IdRes containerViewId: Int,
-                                                   @AnimRes enterAnimation: Int = 0,
-                                                   @AnimRes exitAnimation: Int = 0,
-                                                   @AnimRes popEnterAnimation: Int = 0,
-                                                   @AnimRes popExitAnimation: Int = 0) {
+                                            tag: String? = null,
+                                            allowStateLoss: Boolean = false,
+                                            backStackName: String? = null,
+                                            @IdRes containerViewId: Int,
+                                            @AnimRes enterAnimation: Int = 0,
+                                            @AnimRes exitAnimation: Int = 0,
+                                            @AnimRes popEnterAnimation: Int = 0,
+                                            @AnimRes popExitAnimation: Int = 0) {
     val ft = supportFragmentManager
             .beginTransaction()
             .setCustomAnimations(enterAnimation, exitAnimation, popEnterAnimation, popExitAnimation)
