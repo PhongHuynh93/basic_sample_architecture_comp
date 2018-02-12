@@ -86,7 +86,9 @@ abstract class AppDatabase : RoomDatabase() {
         mIsDatabaseCreated.postValue(true)
     }
 
-    private fun updateDatabaseCreated(applicationContext: Context?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    private fun updateDatabaseCreated(context: Context) {
+        if (context.getDatabasePath(DATABASE_NAME).exists()) {
+            setDatabaseCreated()
+        }
     }
 }
