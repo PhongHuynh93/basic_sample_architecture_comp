@@ -16,7 +16,7 @@ import example.test.phong.testarch.util.whenNull
 class ProductAdapter(var mProductClickCallback: ProductClickCallback?) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
     var mProductList: List<ProductEntity>? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val binding = DataBindingUtil.inflate<ProductItemBinding>(LayoutInflater.from(parent.getContext()), R.layout.product_item,
+        val binding = DataBindingUtil.inflate<ProductItemBinding>(LayoutInflater.from(parent.context), R.layout.product_item,
                 parent, false)
         binding.setCallback(mProductClickCallback)
         return ProductViewHolder(binding)
@@ -29,6 +29,7 @@ class ProductAdapter(var mProductClickCallback: ProductClickCallback?) : Recycle
         holder.binding.executePendingBindings()
     }
 
+    // info - check to use DiffUtil
     fun setProductList(productList: List<ProductEntity>) {
         mProductList.whenNull {
             mProductList = productList
