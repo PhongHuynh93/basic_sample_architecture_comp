@@ -5,9 +5,11 @@ import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
+import android.arch.persistence.room.TypeConverters
 import android.content.Context
 import android.support.annotation.VisibleForTesting
 import example.test.phong.testarch.AppExecutors
+import example.test.phong.testarch.db.converter.DateConverter
 import example.test.phong.testarch.db.dao.CommentDao
 import example.test.phong.testarch.db.dao.ProductDao
 import example.test.phong.testarch.db.entity.CommentEntity
@@ -18,6 +20,7 @@ import example.test.phong.testarch.util.whenNull
  * Created by user on 2/11/2018.
  */
 @Database(entities = arrayOf(ProductEntity::class, CommentEntity::class), version = 1)
+@TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     var mIsDatabaseCreated = MutableLiveData<Boolean>()
 
@@ -25,17 +28,17 @@ abstract class AppDatabase : RoomDatabase() {
         @VisibleForTesting
         val DATABASE_NAME = "basic-sample-db"
 
-        lateinit var sInstance: AppDatabase
+        var sInstance: AppDatabase? = null
         fun getInstance(context: Context, executors: AppExecutors): AppDatabase {
             sInstance.whenNull {
                 synchronized(AppDatabase::class.java) {
                     sInstance.whenNull {
                         sInstance = buildDatabase(context.applicationContext, executors)
-                        sInstance.updateDatabaseCreated(context.applicationContext)
+                        sInstance!!.updateDatabaseCreated(context.applicationContext)
                     }
                 }
             }
-            return sInstance
+            return sInstance!!
         }
 
         private fun buildDatabase(appContext: Context, executors: AppExecutors): AppDatabase {

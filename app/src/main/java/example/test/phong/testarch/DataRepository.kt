@@ -26,7 +26,7 @@ class DataRepository(val database: AppDatabase) {
     }
 
     companion object {
-        private lateinit var sInstance: DataRepository
+        private var sInstance: DataRepository? = null
 
         fun getInstance(database: AppDatabase): DataRepository {
             sInstance.whenNull {
@@ -36,7 +36,7 @@ class DataRepository(val database: AppDatabase) {
                     }
                 }
             }
-            return sInstance
+            return sInstance!!
         }
     }
 

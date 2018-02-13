@@ -23,6 +23,13 @@ import example.test.phong.testarch.viewmodel.ProductListViewModel
 class ProductListFragment : Fragment() {
     lateinit var mBinding: FragmentProductListBinding
     private lateinit var mProductAdapter: ProductAdapter
+
+    companion object {
+        val TAG = "ProductListViewModel"
+
+        fun newInstance() = ProductListFragment()
+    }
+
     private val mProductClickCallback = object : ProductClickCallback {
         override fun onClick(product: ProductEntity) {
             // info - only allow clickable when at least the life cycle in started state
@@ -30,10 +37,6 @@ class ProductListFragment : Fragment() {
                 (activity as MainActivity).show(product)
             }
         }
-    }
-
-    companion object {
-        fun newInstance() = ProductListFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
