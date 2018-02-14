@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import android.databinding.ObservableField
 import example.test.phong.testarch.BasicApp
 import example.test.phong.testarch.DataRepository
 import example.test.phong.testarch.db.entity.CommentEntity
@@ -16,6 +17,10 @@ import example.test.phong.testarch.db.entity.ProductEntity
 class ProductViewModel(application: Application, repository: DataRepository, val productId: Int): AndroidViewModel(application) {
     var mObservableComments: LiveData<List<CommentEntity>>
     var mObservableProduct: LiveData<ProductEntity>
+    var product: ObservableField<ProductEntity> = ObservableField()
+    fun setProduct(product: ProductEntity) {
+        this.product.set(product)
+    }
 
     init {
         mObservableComments = repository.loadComments(productId)
